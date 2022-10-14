@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center mt-2">
+    <h2 class="title">Log into pizza heaven</h2>
+</div>
+
+
+<div class="d-flex justify-content-center mt-5">
+    <form action="/login_handler" method="post">
+        {% with messages = get_flashed_messages(category_filter=['login']) %}
+            {% if messages %}
+                <div class="alert alert-danger" role="alert">
+                <strong>ERROR</strong>
+                    {% for message in messages %}
+                    <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="text" name="email" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" name="password" class="form-control">
+        </div>
+
+        <input id="myButton" type="submit" value="Login" class="btn btn-success mt-2">
+    </form>
+</div>
+
+<div class="d-flex justify-content-center mt-5">
+    <p class="account-link">No account? Register <a href="/register"> here</a></p>
+</div>
+{% endblock %}

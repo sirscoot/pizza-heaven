@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Pizzas{% endblock %}
+
+{% block content %}
+<div class="container d-flex justify-content-around">
+    <h1 class="title">Welcome {{current_user.first_name}}, to Rate My Pizza!&#127829;</h1>
+</div>
+
+<div class="container d-flex justify-content-center">
+    &#128296;<a href="/make_pizza" style="margin-right: 5px;">Make a pizza</a>
+    <a href="/logout" style="margin-left: 5px;">Logout</a>↩️
+</div>
+
+    {% for pizza in pizzas %}
+        <div class="container d-flex justify-content-around mt-2">
+            <div class="card" style="width: auto;">
+                <div class="card-body">
+                <h5 class="card-title">Pizza: {{ pizza.pizza_name }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Pizza Apostle: <a href="/view_user/{{pizza.creator.id}}">{{ pizza.creator.first_name }}</a></h6>
+                <p class="card-subtitle mb-2">Heavenly Votes: <span style="font-weight: bold;">{{ pizza.heavenly }}</span></p>
+                <p class="card-subtitle mb-2">Heresy Votes: <span style="font-weight: bold;">{{ pizza.heresy }}</span></p>
+                <p class="card-text">Pizza Status: 
+                    {% if pizza.heresy > pizza.heavenly %}
+                        Heretic
+                    {% elif pizza.heresy == pizza.heavenly %}
+                        Purgatory
+                    {% else %}
+                        Saviour
+                    {% endif %}</p>
+                    <a href="/view/{{pizza.id}}" class="card-link">View</a>
+                    {% if pizza.creator.id != session['user_id'] %}
+                        <a href="/heavenly/{{pizza.id}}/{{pizza.heavenly}}" class="card-link" style="margin-left: 5px;" onclick="alert('You voted it up :>')">Vote Heavenly</a>
+                        <a href="/heretic/{{pizza.id}}/{{pizza.heresy}}" class="card-link" style="margin-left: 2px;" onclick="alert('You voted it down :<')">Vote Heresy</a>
+                    {% endif %}
+                    {% if pizza.creator.id == session['user_id'] %}
+                        <a href="/edit/{{pizza.id}}" class="card-link">Edit Pizza</a>
+                            {% if pizza.heresy > pizza.heavenly %}
+                                <a href="/delete/{{ pizza.id }}" class="card-link">Delete</a>
+                            {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    
+{% endblock %}

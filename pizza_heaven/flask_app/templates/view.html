@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}View Pizza{% endblock %}
+
+{% block content %}
+<div class="container d-flex justify-content-center mt-5">
+    <div class="card" style="width: auto;">
+        {% for za in pizza %}
+        <div class="card-body">
+          <h5 class="card-title">{{ za.pizza_name }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Description: {{ za.description }}</h6>
+          <p class="card-text">&#129472; Toppings: {{ za.toppings }}</p>
+          <a href="/dashboard" class="card-link">Back to the pizzas</a>
+          {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

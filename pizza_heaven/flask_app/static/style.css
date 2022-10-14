@@ -1,0 +1,25 @@
+body {
+    background-image: url('pizza.jpg'); /* how to make this load faster */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+
+.form-group, .title{
+    color: white;
+}
+
+.account-link{
+    color: white;
+    font-size: 17px;
+    text-shadow: -1px 1px 0 rgb(107, 103, 103),
+                1px 1px 0 #000, 
+                1px -1px 0 #000, 
+                -1px -1px 0 #000;
+}
+
+.card, textarea, input, #myButton{
+    box-shadow: 2px 3px 5px black;
+}

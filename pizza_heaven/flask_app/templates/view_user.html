@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}View Users Pizzas{% endblock %}
+
+{% block content %}
+
+<div class="container d-flex justify-content-center mt-2">
+    <h1 class="title">{{user.first_name}}'s Profile</h1>
+</div>
+
+{% for pizza in pizzas %}
+
+<div class="container d-flex justify-content-around mt-2">
+    <div class="card" style="width: auto;">
+        <div class="card-body">
+          <h5 class="card-title">Pizza: {{pizza.pizza_name}}</h5>
+          <h6 class="card-title">Status: 
+              {% if pizza.heresy > pizza.heavenly %}
+                    Heretic
+                {% elif pizza.heresy == pizza.heavenly %}
+                    Purgatory
+                {% else %}
+                    Saviour
+                {% endif %}
+          </h6>
+          <a href="/dashboard" class="card-link">Home</a>
+          <a href="/view/{{pizza.id}}">View Pizza</a>
+        </div>
+      </div>
+</div>
+{% endfor %}
+
+{% endblock %}
